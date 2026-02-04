@@ -1,0 +1,51 @@
+.viewport {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+}
+
+.toast {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: min(420px, calc(100vw - 36px));
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(18, 26, 38, 0.96);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  color: var(--text);
+
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.toast[data-open="true"] {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.message {
+  font-size: 13px;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.close {
+  height: 30px;
+  min-width: 30px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+}

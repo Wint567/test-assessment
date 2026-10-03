@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# React UI Components
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React and TypeScript component collection, developed and documented in Storybook.
 
-Currently, two official plugins are available:
+**Stack:** React 19 · TypeScript · CSS Modules · Storybook · Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Components
 
-## React Compiler
+| Component | Included behavior |
+| --- | --- |
+| Input | Controlled or internal state, labels, hints, errors, clear action and password visibility |
+| Toast | Success, error, warning and info variants, timed dismissal and a close control |
+| SidebarMenu | Nested items, expandable groups, overlay dismissal and item callbacks |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Each component has a colocated stylesheet and Storybook stories.
 
-## Expanding the ESLint configuration
+## Run the component explorer
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Use Node.js 22.12 or newer within the Node.js 22 series and npm.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm ci
+npm run storybook
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [localhost:6006](http://localhost:6006).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Build the explorer
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build-storybook
 ```
+
+The static component explorer is generated in `storybook-static/`.
+
+## Available checks
+
+```bash
+npm run lint
+npx tsc -b
+npx playwright install chromium
+npx vitest run --project=storybook
+```
+
+The configuration includes Storybook documentation, accessibility and Vitest browser addons. Their presence does not certify accessibility compliance or test coverage.
+
+## Structure
+
+- `src/components/` — component code, CSS Modules and stories.
+- `src/index.ts` — component exports.
+- `.storybook/` — explorer and addon configuration.
+- `vite.config.ts` — Vite and Storybook test configuration.
+
+## Scope
+
+Storybook is the demo entry point. The scaffold's `index.html` refers to a missing `src/main.tsx`, so the standalone Vite app commands are not the supported way to preview this collection.
+
+This is an assessment project, not a published component package. Sidebar keyboard/focus behavior and callback-driven navigation can be expanded further.
